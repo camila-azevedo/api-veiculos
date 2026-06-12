@@ -1,0 +1,45 @@
+server:
+  port: 7777
+  error:
+    include-message: always # Garante que as mensagens das exceções customizadas apareçam no JSON
+
+
+spring:
+  application:
+    name: api-veiculos
+
+
+  # Configuração da Conexão com o PostgreSQL 18
+  datasource:
+    url: jdbc:postgresql://localhost:5432/carros
+    username: postgres
+    password: ceub123456
+    driver-class-name: org.postgresql.Driver
+
+
+  # Configurações do Hibernate / JPA
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: validate # Valida se as classes @Entity batem exatamente com as tabelas do banco
+    show-sql: true       # Printa os comandos SQL no console para monitoramento
+    properties:
+      hibernate:
+        format_sql: true # Formata o SQL no terminal para ficar legível
+
+
+# Configurações do Swagger / OpenAPI 3
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    operations-sorter: alpha # Organiza os endpoints por ordem alfabética na tela do navegador
+    tags-sorter: alpha
+
+
+# Configurações Customizadas de Segurança (JWT)
+api:
+  security:
+    token:
+      secret: ${JWT_SECRET:chave-secreta-e-robusta-para-o-treinamento-2026}
